@@ -12,7 +12,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
 [![License: CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)](LICENSE)
 ![Last Commit](https://img.shields.io/github/last-commit/dreamference/awesome-dgx-spark)
-![Stars](https://img.shields.io/github/stars/YOUR_USERNAME/awesome-dgx-spark?style=social)
+![Stars](https://img.shields.io/github/stars/dreamference/awesome-dgx-spark?style=social)
 
 </div>
 

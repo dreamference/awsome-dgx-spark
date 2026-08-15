@@ -11,8 +11,8 @@
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
 [![License: CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)](LICENSE)
-![Last Commit](https://img.shields.io/github/last-commit/dreamference/awesome-dgx-spark)
-![Stars](https://img.shields.io/github/stars/dreamference/awesome-dgx-spark?style=social)
+![Last Commit](https://img.shields.io/github/last-commit/dreamference/awsome-dgx-spark)
+![Stars](https://img.shields.io/github/stars/dreamference/awsome-dgx-spark?style=social)
 
 </div>
 
@@ -42,14 +42,17 @@ The question everyone asks first. Community-verified **decode speeds (tok/s, sin
 |---|---|---|---:|---|
 | Qwen3.6-35B-A3B *(full 262K ctx!)* | NVFP4 | vLLM + MTP spec decode (k=3) | **~106** | [howtospark.com](https://howtospark.com/) |
 | Nemotron-3-Nano-30B-A3B | NVFP4 | Atlas (Rust+CUDA) | **~84–88** | [Sggin1/DGX-SPARK](https://github.com/Sggin1/DGX-SPARK) |
+| Qwen3.5-**122B**-A10B 🔥 | INT4 AutoRound hybrid | vLLM + DFlash spec decode | **~81** | [NVIDIA forums](https://forums.developer.nvidia.com/t/dflash-for-qwen3-5-122b-a10b-80-tok-s-on-1x-spark/374328) |
 | Nemotron-3-Nano-30B-A3B | NVFP4 | llama.cpp | ~70 | [llama.cpp #16578](https://github.com/ggml-org/llama.cpp/discussions/16578) |
 | gpt-oss-120B | MXFP4 | vLLM | ~59 | [llama.cpp #16578](https://github.com/ggml-org/llama.cpp/discussions/16578) |
+| Qwen3.5-122B-A10B | INT4+FP8 hybrid | vLLM + MTP-2 (v2 pipeline) | ~51–55 | [NVIDIA forums](https://forums.developer.nvidia.com/t/qwen3-5-122b-a10b-on-single-spark-up-to-51-tok-s-v2-1-patches-quick-start-benchmark/365639) |
 | Nemotron-3-Nano-30B-A3B | NVFP4 | vLLM | ~56 | [llama.cpp #16578](https://github.com/ggml-org/llama.cpp/discussions/16578) |
 | gpt-oss-120B | MXFP4 | SGLang | ~53 | [NVIDIA forums](https://forums.developer.nvidia.com/t/investigating-performance-issue-bottleneck/359200) |
 | Qwen3-Coder-Next | Q4_K_M | Ollama | ~47 | [ai-muninn 8-model bench](https://ai-muninn.com/en/blog/dgx-spark-ollama-benchmark-8-models) |
 | gpt-oss-120B | MXFP4 | llama.cpp | ~40 | [llama.cpp #16578](https://github.com/ggml-org/llama.cpp/discussions/16578) |
 | gpt-oss-120B *(real agent workload, JSON out)* | MXFP4 | vLLM | ~34 single / **~863 aggregate** batched | [Dendro Logic concurrency bench](https://dendro-logic.com/engineering/nvidia-dgx-spark-concurrency-benchmark/) |
 | Qwen AgentWorld 35B-A3B | BF16 (unquantized) | vLLM | ~30 | [howtospark.com](https://howtospark.com/) |
+| GLM-4.7-Flash *(BF16, ~200K ctx)* | BF16 + FP8 KV | SGLang + EAGLE (Triton) | ~24–25 | [NVIDIA forums](https://forums.developer.nvidia.com/t/glm4-7-bf-en-spark-con-sglang-y-triton/361238) |
 | Qwen3-VL-32B *(dense)* | AWQ 4-bit | vLLM | ~12 | [NVIDIA forums](https://forums.developer.nvidia.com/t/investigating-performance-issue-bottleneck/359200) |
 | Qwen3-32B *(dense)* ⚠️ | Q4 | Ollama | ~9.5 | [NVIDIA forums](https://forums.developer.nvidia.com/t/dgx-spark-performance/356716) |
 
@@ -60,16 +63,29 @@ The question everyone asks first. Community-verified **decode speeds (tok/s, sin
 | gpt-oss-120B | MXFP4 | vLLM | 2× Spark | **~76** | [llama.cpp #16578](https://github.com/ggml-org/llama.cpp/discussions/16578) |
 | Qwen3-Coder-Next | FP8 | SGLang | 2× Spark | ~61 | [llama.cpp #16578](https://github.com/ggml-org/llama.cpp/discussions/16578) |
 | DeepSeek-V4-Flash *(1M context!)* | — | DSpark fork | 2× Spark | 60+ | [Entrpi/ds4](https://github.com/topics/dgx-spark) |
+| Qwen3.5-**397B**-A17B *(262K ctx)* | INT4 AutoRound | vLLM TP2 | 2× Spark | ~26–28 | [NVIDIA forums](https://forums.developer.nvidia.com/t/qwen3-5-397b-a17b-run-in-dual-spark-but-i-have-a-concern/361967) |
 | GLM-5.2 *(753B MoE)* @ 96K ctx | 2-bit experts + NVFP4 attn | vLLM + speculator | 2× Spark TP2 | ~26 | [howtospark.com](https://howtospark.com/) |
+| GLM-4.7-FP8 *(355B MoE, 202K ctx)* | FP8 | SGLang + EAGLE | 4× Spark | 20–27 | [NVIDIA forums](https://forums.developer.nvidia.com/t/running-glm-4-7-fp8-355b-moe-on-4x-dgx-spark-with-sglang-eagle-speculative-decoding/359256) |
 | Qwen3-VL-235B-A22B | NVFP4 | vLLM | 2× Spark | ~21 | [NVIDIA forums](https://forums.developer.nvidia.com/t/investigating-performance-issue-bottleneck/359200) |
-| GLM-4.7-FP8 *(355B MoE)* | FP8 | SGLang + EAGLE | 4× Spark | ✅ runs | [NVIDIA forums](https://forums.developer.nvidia.com/c/accelerated-computing/dgx-spark-gb10/dgx-spark-gb10-projects/723) |
+| GLM-4.7 *(128K multi-turn agent)* | AWQ | vLLM | 2× Spark | ~15 | [NVIDIA forums](https://forums.developer.nvidia.com/t/glm-4-7-nvfp4-not-flash-served-with-trt-llm-on-2x-dgx-spark/358551) |
+
+### 🔧 The Tuning Sagas (why you should never trust day-one numbers)
+
+The forums' best content isn't benchmarks — it's **benchmark arcs**. Same hardware, weeks apart:
+
+| Saga | Before → After | The unlock | Thread |
+|---|---|---|---|
+| Qwen3.5-122B on ONE Spark | **28 → 51 → 81 tok/s** (2.9×) | INT4+FP8 hybrid layout, MTP-2, then DFlash block-speculative decode | [365639](https://forums.developer.nvidia.com/t/qwen3-5-122b-a10b-on-single-spark-up-to-51-tok-s-v2-1-patches-quick-start-benchmark/365639) → [374328](https://forums.developer.nvidia.com/t/dflash-for-qwen3-5-122b-a10b-80-tok-s-on-1x-spark/374328) |
+| GLM-4.7-FP8 on 4× Spark | **9.8 → 25.1 tok/s** (2.56×) | ONE line: enable RDMA on the SGLang container — NCCL was silently on TCP | [373675](https://forums.developer.nvidia.com/t/glm-4-7-fp8-on-4x-dgx-spark-via-sglang-2-5x-speedup-8-2-25-tok-s-just-by-enabling-rdma/373675) |
+| Qwen3-Next-NVFP4 | **20 → 35 tok/s** (1.75×) | FlashInfer 12.1f kernels | [NVIDIA forums](https://forums.developer.nvidia.com/t/glm-4-7-flash-nvfp4-was-just-released-but-for-transformers-5-0-vllm-0-14/358048) |
+| GLM-4.7-FP8 MoE kernels on GB10 | crash → 20–27 tok/s | 9 hours of MoE kernel auto-tuning for GB10's 101KB shared-memory limit ([prebuilt configs](https://github.com/BTankut/dgx-spark-sglang-moe-configs)) | [359256](https://forums.developer.nvidia.com/t/running-glm-4-7-fp8-355b-moe-on-4x-dgx-spark-with-sglang-eagle-speculative-decoding/359256) |
 
 **📐 How to read this table:**
 
 - ⚡ **MoE crushes dense.** A 120B MoE (~5B active params) decodes 4–6× faster than a 32B dense model. The 273 GB/s bandwidth is the law — active parameters are what you pay for.
-- 🎯 **Speculative decoding is free speed.** MTP/EAGLE/DFlash draft heads add 50%+ on coding and structured output. If your model ships an MTP head, use it.
+- 🎯 **Speculative decoding is free speed.** MTP/EAGLE/DFlash draft heads add 50–190% on coding and structured output. The 122B jumping from 28 → 81 tok/s is mostly spec decode.
 - 📦 **Batch it.** Single-stream numbers are the *floor* — the same gpt-oss-120B that does ~34 tok/s solo pushes **~860 tok/s aggregate** under concurrency. Sparks are throughput machines.
-- 🐘 **Big-model party trick:** Qwen3.5-122B-A10B in NVFP4 shrinks from 234 GB → [~75 GB and fits on one Spark](https://forums.developer.nvidia.com/c/accelerated-computing/dgx-spark-gb10/dgx-spark-gb10-projects/723) — a forum favorite for "best single-Spark model."
+- 🕰️ **Day-one numbers lie.** Every model in the sagas table got 1.7–2.9× faster after community tuning. If a review says a model is "too slow on Spark," check the thread date.
 
 > 📊 Numbers move fast — engines, kernels and quants improve monthly (the CES 2026 update alone was up to 2.5×). For live, reproducible results check **[Spark Arena](https://spark-arena.com/)**. Got better numbers? **[PR the table!](#-contributing)**
 
